@@ -28,11 +28,11 @@
     );
     $("#edit-my-name").on("change paste keyup", function () {
       if ($("#register-users-form").valid()) {
-        $('#edit-submit').attr('disabled', false);
-        $('#edit-submit').removeClass('is-disabled');
+        $('#edit-submit-name').attr('disabled', false);
+        $('#edit-submit-name').removeClass('is-disabled');
       } else {
-        $('#edit-submit').attr('disabled', true);
-        $('#edit-submit').addClass('is-disabled');
+        $('#edit-submit-name').attr('disabled', true);
+        $('#edit-submit-name').addClass('is-disabled');
       }
     });
 

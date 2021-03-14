@@ -8,20 +8,6 @@ namespace Drupal\my_users\Services;
 class RegisterUsersService {
 
   /**
-   *
-   */
-  public function renderRegisterUsesForm(): array {
-    // $response = new AjaxResponse();
-    //    $registerUsersFrom = \Drupal::formBuilder()->getForm(RegisterUserForm::class);
-    // $renderer = \Drupal::service('renderer');
-    //    $renderForm = $renderer->render($registerUsersFrom);
-    //    return $registerUsersFrom;
-    // Return [
-    //      '#markup' => Markup::create("{$renderForm}"),
-    //    ];.
-  }
-
-  /**
    * @param string $user
    *   Name user.
    *

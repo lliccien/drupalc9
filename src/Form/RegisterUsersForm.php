@@ -66,7 +66,7 @@ class RegisterUsersForm extends FormBase {
       '#size' => 64,
       '#required' => TRUE,
     ];
-    $form['submit'] = [
+    $form['submit_name'] = [
       '#type' => 'submit',
       '#value' => $this->t('Save'),
       '#attributes' => [
@@ -117,7 +117,6 @@ class RegisterUsersForm extends FormBase {
 
 
     if ((!$form_state->hasAnyErrors() || empty($form_state->getErrors())) && !empty($userId)) {
-//      $name = $form_state->getValues()['my_name'];
       $response->addCommand(new openModalAjaxCommand($userId, $name));
     }
     return $response;
@@ -127,14 +126,6 @@ class RegisterUsersForm extends FormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
-    // $name = $form_state->getValues()['my_name'];
-    //
-    //    if (strlen($name) <= 5) {
-    //      $form_state->setErrorByName('my_name', 'The name must have a minimum of 5 characters');
-    //    }
-    //    if ($this->myUsersRegister->uniqueName($name)) {
-    //      $form_state->setErrorByName('my_name', 'The ' . $name . ' is already registered');
-    //    }
     parent::validateForm($form, $form_state);
   }
 
@@ -142,10 +133,6 @@ class RegisterUsersForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    // Display result.
-    //    foreach ($form_state->getValues() as $key => $value) {
-    //      \Drupal::messenger()->addMessage($key . ': ' . ($key === 'text_format'?$value['value']:$value));
-    //    }.
   }
 
 }

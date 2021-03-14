@@ -73,13 +73,25 @@ class UsersController extends ControllerBase {
   public function registerUsers(): array {
 
     $block_manager = \Drupal::service('plugin.manager.block');
+    $plugin_block = $block_manager->createInstance('register_users_block');
 
-    kint($block_manager);
+    $block_render_array = [
+      '#theme' => 'block',
+      '#attributes' => [],
+      '#configuration' => $plugin_block->getConfiguration(),
+      '#plugin_id' => $plugin_block->getPluginId(),
+      '#base_plugin_id' => $plugin_block->getBaseId(),
+      '#derivative_plugin_id' => $plugin_block->getDerivativeId(),
+      '#attached' => [
+        'library' => [
+          'my_users/my_users',
+        ],
+      ],
+    ];
 
-    Return [
-          '#type' => 'markup',
-          '#markup' => $this->t('Implement method: exportUsersExcel'),
-        ];
+    $block_render_array['content'] = $plugin_block->build();
+    return $block_render_array;
+
   }
 
   /**

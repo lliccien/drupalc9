@@ -43,9 +43,6 @@ class RegisterUsersModalForm extends FormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
-//    foreach ($form_state->getValues() as $key => $value) {
-//      // @todo Validate fields.
-//    }
     parent::validateForm($form, $form_state);
   }
 
@@ -53,10 +50,6 @@ class RegisterUsersModalForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    // Display result.
-    //    foreach ($form_state->getValues() as $key => $value) {
-    //      \Drupal::messenger()->addMessage($key . ': ' . ($key === 'text_format'?$value['value']:$value));
-    //    }.
   }
 
 }
