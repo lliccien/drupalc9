@@ -1,0 +1,56 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the my_users module.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function my_users_install() {
+  \Drupal::messenger()->addStatus('installing module My Users');
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function my_users_uninstall() {
+  drupal_uninstall_schema('my_users');
+}
+
+/**
+ * Implements hook_schema().
+ */
+function my_users_schema(): array
+{
+  $schema['myusers'] = [
+    'description' => 'Table description.',
+    'fields' => [
+      'id' => [
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'description' => 'Primary Key: Unique record ID.',
+      ],
+//      'uid' => [
+//        'type' => 'int',
+//        'unsigned' => TRUE,
+//        'not null' => TRUE,
+//        'default' => 0,
+//        'description' => 'The {users}.uid of the user who created the record.',
+//      ],
+      'name' => [
+        'type' => 'varchar',
+        'length' => 64,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Name of user.',
+      ],
+    ],
+    'primary key' => ['id'],
+  ];
+
+  return $schema;
+}
+

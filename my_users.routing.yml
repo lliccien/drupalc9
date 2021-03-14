@@ -1,0 +1,42 @@
+my_users.users_controller_registerUsers:
+  path: '/usuario/registro'
+  defaults:
+    _controller: '\Drupal\my_users\Controller\UsersController::registerUsers'
+    _title: 'Users registration'
+  requirements:
+    _permission: 'access users register'
+my_users.users_controller_showUsers:
+  path: '/usuario/consulta'
+  defaults:
+    _controller: '\Drupal\my_users\Controller\UsersController::showUsers'
+    _title: 'Show users list'
+  requirements:
+    _permission: 'access users show'
+my_users.users_controller_exportUsersExcel:
+  path: '/usuario/consulta/excel'
+  defaults:
+    _controller: '\Drupal\my_users\Controller\UsersController::exportUsersExcel'
+    _title: 'Users export to excel'
+  requirements:
+    _permission: 'access export users excel'
+my_users.users_controller_importUsersCsv:
+  path: '/usuario/importar'
+  defaults:
+    _controller: '\Drupal\my_users\Controller\UsersController::importUsersCsv'
+    _title: 'Users import from CSV'
+  requirements:
+    _permission: 'access import users csv'
+my_users.resgister_users_form:
+  path: '/my_users/form/register_users'
+  defaults:
+    _form: '\Drupal\my_users\Form\RegisterUsersForm'
+    _title: 'RegisterUsersForm'
+  requirements:
+    _access: 'TRUE'
+my_users.register_users_modal_form:
+  path: '/my_users/form/register_users_modal'
+  defaults:
+    _form: '\Drupal\my_users\Form\RegisterUsersModalForm'
+    _title: 'RegisterUsersModalForm'
+  requirements:
+    _access: 'TRUE'

@@ -1,0 +1,33 @@
+my_users.menu_my_users:
+  title: 'My Users'
+  description: 'Serempre test 2021'
+  expanded: 1
+  route_name: <nolink>
+
+my_users.registration:
+  title: Users registration
+  description: Users registration.
+  parent: my_users.menu_my_users
+  route_name: my_users.users_controller_registerUsers
+  weight: 1
+
+my_users.show:
+  title: Show users list
+  description: Show users list.
+  parent: my_users.menu_my_users
+  route_name: my_users.users_controller_showUsers
+  weight: 2
+
+my_users.export:
+  title: Users export to excel
+  description: Users export to excel.
+  parent: my_users.menu_my_users
+  route_name: my_users.users_controller_exportUsersExcel
+  weight: 3
+
+my_users.import:
+  title: Users import from CSV
+  description: Users import from CSV.
+  parent: my_users.menu_my_users
+  route_name: my_users.users_controller_importUsersCsv
+  weight: 4

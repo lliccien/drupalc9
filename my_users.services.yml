@@ -1,0 +1,13 @@
+services:
+  my_users.register:
+    class: Drupal\my_users\Services\RegisterUsersService
+    arguments: []
+  my_users.show:
+    class: Drupal\my_users\Services\ShowUsersService
+    arguments: []
+  my_users.export_excel:
+    class: Drupal\my_users\Services\ExportUsersExcelService
+    arguments: []
+  my_users.import_csv:
+    class: Drupal\my_users\Services\ImportUsersCsvService
+    arguments: []

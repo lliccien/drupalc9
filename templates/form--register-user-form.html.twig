@@ -1,0 +1,15 @@
+<!-- Add you custom twig html here -->
+<h1>TEST</h1>
+
+<div>
+{#  {{ dump(_context|keys) }}#}
+  {{ kint(_context|keys) }}
+  {{ kint(form) }}
+  {{ kint(attributes) }}
+  {{ kint(children) }}
+
+</div>
+
+<form{{ attributes }}>
+  {{ children }}
+</form>

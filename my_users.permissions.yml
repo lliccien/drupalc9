@@ -1,0 +1,16 @@
+access users register:
+  title: 'Users registration'
+  description: 'Allows access to the users registry.'
+#  restrict access: true
+
+access users show:
+  title: 'Show users list'
+  description: 'Allows access to the users show users list.'
+
+access export users excel:
+  title: 'Users export to excel'
+  description: 'Allows access to export users to Excel.'
+
+access import users csv:
+  title: 'Users import from CSV'
+  description: 'Allows access to import users from CSV file.'
