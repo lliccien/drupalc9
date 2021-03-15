@@ -14,4 +14,24 @@ class ImportUsersCsvService {
 
   }
 
+  /**
+   *
+   */
+  public function saveCsv(string $name) {
+
+    try {
+      $connection = \Drupal::database();
+      $query = $connection->insert('myusers')
+        ->fields(['id', 'name'])
+        ->values(['name' => $name]);
+      $result = $query->execute();
+    }
+    catch (\Exception $e) {
+      return $e->getMessage();
+    }
+
+    return $result;
+
+  }
+
 }

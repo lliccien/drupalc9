@@ -3,9 +3,9 @@
 namespace Drupal\my_users\Controller;
 
 // Use Drupal\my_users\Form\RegisterUserForm;.
-use Drupal\block\Entity\Block;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Form\FormBuilder;
+use Drupal\Core\Render\Markup;
 use Drupal\my_users\Services\RegisterUsersService;
 use Drupal\my_users\Services\ShowUsersService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -126,10 +126,15 @@ class UsersController extends ControllerBase {
    *   Return Hello string.
    */
   public function importUsersCsv(): array {
+
+    $myForm = $this->formBuilder()->getForm('Drupal\my_users\Form\ImportUsersFromCsvForm');
+    $renderer = \Drupal::service('renderer');
+    $myFormHtml = $renderer->render($myForm);
+
     return [
-      '#type' => 'markup',
-      '#markup' => $this->t('Implement method: importUsersCsv'),
+      '#markup' => Markup::create(" {$myFormHtml} "),
     ];
+
   }
 
 }

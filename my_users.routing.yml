@@ -40,3 +40,10 @@ my_users.register_users_modal_form:
     _title: 'RegisterUsersModalForm'
   requirements:
     _access: 'TRUE'
+my_users.import_users_from_csv:
+  path: '/my_users/form/import_users_from_csv_form'
+  defaults:
+    _form: '\Drupal\my_users\Form\ImportUsersFromCsvForm'
+    _title: 'ImportUsersFromCsvForm'
+  requirements:
+    _access: 'TRUE'

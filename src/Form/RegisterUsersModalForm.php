@@ -30,7 +30,6 @@ class RegisterUsersModalForm extends FormBase {
           'btn btn-secondary',
         ],
         ' data-dismiss' => 'modal',
-//        'onClick' => ' $("#register-users-form").reset();',
       ],
       '#prefix' => '<div class="modal-footer">',
       '#suffix' => '</div>',
