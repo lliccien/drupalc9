@@ -9,7 +9,7 @@ use Drupal\file\Entity\File;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Class ImportUsersFromCsvForm.
+ * Class Import Users From Csv Form.
  */
 class ImportUsersFromCsvForm extends FormBase {
 
@@ -44,7 +44,6 @@ class ImportUsersFromCsvForm extends FormBase {
       '#type' => 'managed_file',
       '#title' => $this->t('Import'),
       '#description' => $this->t('Select the .csv file with the information to import'),
-    // '#title_display' => 'invisible',
       '#upload_location' => 'public://',
       '#upload_validators' => [
         'file_validate_extensions' => ['csv'],
@@ -93,13 +92,10 @@ class ImportUsersFromCsvForm extends FormBase {
             [array_map('base64_encode', $row)],
           ];
         }
-
         fclose($handle);
       }
     }
-
     batch_set($batch);
-
   }
 
 }

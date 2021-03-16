@@ -33,13 +33,6 @@ function my_users_schema(): array
         'not null' => TRUE,
         'description' => 'Primary Key: Unique record ID.',
       ],
-//      'uid' => [
-//        'type' => 'int',
-//        'unsigned' => TRUE,
-//        'not null' => TRUE,
-//        'default' => 0,
-//        'description' => 'The {users}.uid of the user who created the record.',
-//      ],
       'name' => [
         'type' => 'varchar',
         'length' => 64,

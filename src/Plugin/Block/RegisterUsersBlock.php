@@ -2,8 +2,10 @@
 
 namespace Drupal\my_users\Plugin\Block;
 
+use Drupal\my_users\Services\RegisterUsersService;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\webprofiler\Form\FormBuilderWrapper;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -21,14 +23,14 @@ class RegisterUsersBlock extends BlockBase implements ContainerFactoryPluginInte
    *
    * @var \Drupal\webprofiler\Form\FormBuilderWrapper
    */
-  protected $formBuilder;
+  protected FormBuilderWrapper $formBuilder;
 
   /**
    * Drupal\my_users\Services\RegisterUsersService definition.
    *
    * @var \Drupal\my_users\Services\RegisterUsersService
    */
-  protected $myUsersRegister;
+  protected RegisterUsersService $myUsersRegister;
 
   /**
    * {@inheritdoc}
@@ -59,7 +61,6 @@ class RegisterUsersBlock extends BlockBase implements ContainerFactoryPluginInte
         ],
       ],
     ];
-
 
     return $build;
   }

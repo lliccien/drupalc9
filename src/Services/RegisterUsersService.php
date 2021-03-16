@@ -3,15 +3,18 @@
 namespace Drupal\my_users\Services;
 
 /**
- * Class RegisterUsersService.
+ * Class Register Users Service.
  */
 class RegisterUsersService {
 
   /**
+   * Method save user.
+   *
    * @param string $user
-   *   Name user.
+   *   Param name user.
    *
    * @throws \Exception
+   *   Return on fail Exception.
    */
   public function saveUser(string $user) {
 
@@ -29,6 +32,8 @@ class RegisterUsersService {
   }
 
   /**
+   * Method unique name.
+   *
    * @param string $name
    *   String name.
    *

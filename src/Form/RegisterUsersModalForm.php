@@ -6,7 +6,7 @@ use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Class RegisterUsersModalForm.
+ * Class Register Users Modal Form.
  */
 class RegisterUsersModalForm extends FormBase {
 

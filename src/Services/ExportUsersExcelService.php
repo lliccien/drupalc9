@@ -3,7 +3,7 @@
 namespace Drupal\my_users\Services;
 
 /**
- * Class ExportUsersExcelService.
+ * Class Export Users Excel Service.
  */
 class ExportUsersExcelService {
 
@@ -12,6 +12,16 @@ class ExportUsersExcelService {
    */
   public function __construct() {
 
+  }
+
+  /**
+   * Method csv Export.
+   */
+  public function csvExport() {
+    $connection = \Drupal::database();
+    $query = $connection->select('myusers')
+      ->fields('myusers');
+    return $query->execute()->fetchAll();
   }
 
 }

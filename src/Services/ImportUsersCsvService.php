@@ -3,7 +3,7 @@
 namespace Drupal\my_users\Services;
 
 /**
- * Class ImportUsersCsvService.
+ * Class Import Users Csv Service.
  */
 class ImportUsersCsvService {
 
@@ -15,7 +15,13 @@ class ImportUsersCsvService {
   }
 
   /**
+   * Method Save csv.
    *
+   * @param string $name
+   *   Param name.
+   *
+   * @return \Drupal\Core\Database\StatementInterface|int|string|null
+   *   return result database.
    */
   public function saveCsv(string $name) {
 

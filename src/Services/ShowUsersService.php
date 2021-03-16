@@ -3,7 +3,7 @@
 namespace Drupal\my_users\Services;
 
 /**
- * Class ShowUsersService.
+ * Class Show Users Service.
  */
 class ShowUsersService {
 

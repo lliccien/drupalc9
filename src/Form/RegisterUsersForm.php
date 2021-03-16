@@ -2,6 +2,9 @@
 
 namespace Drupal\my_users\Form;
 
+use Drupal\Core\Form\FormBuilder;
+use Drupal\my_users\Services\RegisterUsersService;
+use Drupal\Core\Database\Driver\mysql\Connection;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\HtmlCommand;
 use Drupal\Core\Form\FormBase;
@@ -10,7 +13,7 @@ use Drupal\my_users\Ajax\OpenModalAjaxCommand;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Class ResgisterUsersForm.
+ * Class Register User sForm.
  */
 class RegisterUsersForm extends FormBase {
 
@@ -19,21 +22,21 @@ class RegisterUsersForm extends FormBase {
    *
    * @var \Drupal\Core\Database\Driver\mysql\Connection
    */
-  protected $database;
+  protected Connection $database;
 
   /**
    * Drupal\my_users\Services\RegisterUsersService definition.
    *
    * @var \Drupal\my_users\Services\RegisterUsersService
    */
-  protected $myUsersRegister;
+  protected RegisterUsersService $myUsersRegister;
 
   /**
    * The form builder.
    *
    * @var \Drupal\Core\Form\FormBuilder
    */
-  protected $formBuilder;
+  protected FormBuilder $formBuilder;
 
   /**
    * {@inheritdoc}
@@ -88,7 +91,7 @@ class RegisterUsersForm extends FormBase {
   /**
    * AJAX callback handler that displays any errors or a success message.
    */
-  public function submitModalFormAjax(array $form, FormStateInterface $form_state) {
+  public function submitModalFormAjax(array $form, FormStateInterface $form_state): AjaxResponse {
     $response = new AjaxResponse();
 
     $name = $form_state->getValues()['my_name'];
@@ -96,8 +99,7 @@ class RegisterUsersForm extends FormBase {
     if (strlen($name) <= 5) {
       $msg_strlen = '<label class="error">The name must have a minimum of 5 characters</label>';
       $response->addCommand(new HtmlCommand('.msg-validation', $msg_strlen));
-      // $sleep = 5000;
-      //      $response->addCommand(new InvokeCommand(NULL, resetForm, [$sleep]));
+
       return $response;
     }
     if ($this->myUsersRegister->uniqueName($name)) {
@@ -107,14 +109,12 @@ class RegisterUsersForm extends FormBase {
       return $response;
     }
 
-
     try {
       $userId = $this->myUsersRegister->saveUser($form_state->getValues()['my_name']);
     }
     catch (\Exception $e) {
       \Drupal::messenger()->addMessage('The name could not be saved. Try again');
     }
-
 
     if ((!$form_state->hasAnyErrors() || empty($form_state->getErrors())) && !empty($userId)) {
       $response->addCommand(new openModalAjaxCommand($userId, $name));
