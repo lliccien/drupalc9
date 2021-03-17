@@ -2,32 +2,14 @@
 
 namespace Drupal\my_users\Form;
 
-use Drupal\my_users\Services\ImportUsersCsvService;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\file\Entity\File;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Class Import Users From Csv Form.
  */
 class ImportUsersFromCsvForm extends FormBase {
-
-  /**
-   * Drupal\my_users\Services\ImportUsersCsvService definition.
-   *
-   * @var \Drupal\my_users\Services\ImportUsersCsvService
-   */
-  protected ImportUsersCsvService $myUsersImportCsv;
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function create(ContainerInterface $container) {
-    return new static(
-      $container->get('my_users.import_csv'),
-    );
-  }
 
   /**
    * {@inheritdoc}

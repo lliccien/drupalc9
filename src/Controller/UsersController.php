@@ -30,10 +30,6 @@ class UsersController extends ControllerBase {
   /**
    * Constructs a new UsersController.
    *
-   * //   * @param \Drupal\Core\Form\FormBuilder $formBuilder
-   * //   *   Inject FormBuilder.
-   * //   *
-   *
    * @param \Drupal\my_users\Services\ShowUsersService $showUsersService
    *   Inject service.
    *
@@ -71,24 +67,14 @@ class UsersController extends ControllerBase {
   public function registerUsers(): array {
 
     $block_manager = \Drupal::service('plugin.manager.block');
-    $plugin_block = $block_manager->createInstance('register_users_block');
 
-    $block_render_array = [
-      '#theme' => 'block',
-      '#attributes' => [],
-      '#configuration' => $plugin_block->getConfiguration(),
-      '#plugin_id' => $plugin_block->getPluginId(),
-      '#base_plugin_id' => $plugin_block->getBaseId(),
-      '#derivative_plugin_id' => $plugin_block->getDerivativeId(),
-      '#attached' => [
-        'library' => [
-          'my_users/my_users',
-        ],
-      ],
-    ];
-
-    $block_render_array['content'] = $plugin_block->build();
-    return $block_render_array;
+    $config = [];
+    $plugin_block = $block_manager->createInstance('register_users_block', $config);
+    $access_result = $plugin_block->access(\Drupal::currentUser());
+    if (is_object($access_result) && $access_result->isForbidden() || is_bool($access_result) && !$access_result) {
+      return [];
+    }
+    return $plugin_block->build();
 
   }
 
@@ -112,8 +98,6 @@ class UsersController extends ControllerBase {
    */
   public function exportUsersExcel() {
 
-    ini_set("auto_detect_line_endings", TRUE);
-
     $handle = fopen('php://temp', 'w+');
 
     $header = [
@@ -136,10 +120,8 @@ class UsersController extends ControllerBase {
     fclose($handle);
 
     $response = new Response();
-
     $response->headers->set('Content-Type', 'text/csv');
     $response->headers->set('Content-Disposition', 'attachment; filename="my_users.csv"');
-
     $response->setContent($csv_data);
 
     return $response;
@@ -154,8 +136,7 @@ class UsersController extends ControllerBase {
    */
   public function importUsersCsv(): array {
 
-    return $this->formBuilder()->getForm('Drupal\my_users\Form\ImportUsersFromCsvForm');
-
+    return \Drupal::formBuilder()->getForm('Drupal\my_users\Form\ImportUsersFromCsvForm');
 
   }
 
