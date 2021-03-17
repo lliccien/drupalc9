@@ -20,7 +20,7 @@ class UsersController extends ControllerBase {
    *
    * @var \Drupal\Core\Form\FormBuilder
    */
-  protected $formBuilder;
+  protected FormBuilder $formBuilder;
 
   /**
    * Show Users Service.
@@ -148,7 +148,7 @@ class UsersController extends ControllerBase {
     $response = new Response();
 
     $response->headers->set('Content-Type', 'text/csv');
-    $response->headers->set('Content-Disposition', 'attachment; filename="article-report.csv"');
+    $response->headers->set('Content-Disposition', 'attachment; filename="my_users.csv"');
 
     $response->setContent($csv_data);
 
