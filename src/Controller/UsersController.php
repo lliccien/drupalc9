@@ -3,8 +3,6 @@
 namespace Drupal\my_users\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
-use Drupal\Core\Form\FormBuilder;
-use Drupal\Core\Render\Markup;
 use Drupal\my_users\Services\ExportUsersExcelService;
 use Drupal\my_users\Services\ShowUsersService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -14,13 +12,6 @@ use Symfony\Component\HttpFoundation\Response;
  * Class Users Controller.
  */
 class UsersController extends ControllerBase {
-
-  /**
-   * The form builder.
-   *
-   * @var \Drupal\Core\Form\FormBuilder
-   */
-  protected FormBuilder $formBuilder;
 
   /**
    * Show Users Service.
@@ -39,8 +30,9 @@ class UsersController extends ControllerBase {
   /**
    * Constructs a new UsersController.
    *
-   * @param \Drupal\Core\Form\FormBuilder $formBuilder
-   *   Inject FormBuilder.
+   * //   * @param \Drupal\Core\Form\FormBuilder $formBuilder
+   * //   *   Inject FormBuilder.
+   * //   *
    *
    * @param \Drupal\my_users\Services\ShowUsersService $showUsersService
    *   Inject service.
@@ -48,8 +40,7 @@ class UsersController extends ControllerBase {
    * @param \Drupal\my_users\Services\ExportUsersExcelService $exportUsersExcelService
    *   Inject service.
    */
-  public function __construct(FormBuilder $formBuilder, ShowUsersService $showUsersService, ExportUsersExcelService $exportUsersExcelService) {
-    $this->formBuilder = $formBuilder;
+  public function __construct(ShowUsersService $showUsersService, ExportUsersExcelService $exportUsersExcelService) {
     $this->showUsersService = $showUsersService;
     $this->exportUsersExcelService = $exportUsersExcelService;
 
@@ -66,7 +57,6 @@ class UsersController extends ControllerBase {
    */
   public static function create(ContainerInterface $container): UsersController {
     return new static(
-     $container->get('form_builder'),
      $container->get('my_users.show'),
      $container->get('my_users.export_excel'),
     );
@@ -164,13 +154,8 @@ class UsersController extends ControllerBase {
    */
   public function importUsersCsv(): array {
 
-    $myForm = $this->formBuilder()->getForm('Drupal\my_users\Form\ImportUsersFromCsvForm');
-    $renderer = \Drupal::service('renderer');
-    $myFormHtml = $renderer->render($myForm);
+    return \Drupal::formBuilder()->getForm('Drupal\my_users\Form\ImportUsersFromCsvForm');
 
-    return [
-      '#markup' => Markup::create(" {$myFormHtml} "),
-    ];
 
   }
 

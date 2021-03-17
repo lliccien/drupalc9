@@ -70,9 +70,6 @@ function _my_users_set_log(&$form, FormStateInterface $form_state) {
  */
 function my_users_user_insert(Drupal\Core\Entity\EntityInterface $entity) {
 
-  $messenger = \Drupal::messenger();
-  $messenger->addMessage(t('Registro intervenido'), 'status');
-
   $request = Request::createFromGlobals();
   $uid = \Drupal::currentUser()->id();
   $ip = $request->getClientIp();
