@@ -61,7 +61,7 @@ function my_users_schema(): array
       ],
       'ip' => [
         'type' => 'varchar',
-        'length' => 20,
+        'length' => 64,
         'not null' => TRUE,
         'default' => '',
       ],
