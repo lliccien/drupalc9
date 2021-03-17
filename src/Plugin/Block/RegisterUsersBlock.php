@@ -2,11 +2,7 @@
 
 namespace Drupal\my_users\Plugin\Block;
 
-use Drupal\my_users\Services\RegisterUsersService;
 use Drupal\Core\Block\BlockBase;
-use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
-use Drupal\webprofiler\Form\FormBuilderWrapper;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Provides a 'RegisterUsersBlock' block.
@@ -16,32 +12,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *  admin_label = @Translation("Register users block"),
  * )
  */
-class RegisterUsersBlock extends BlockBase implements ContainerFactoryPluginInterface {
-
-  /**
-   * Drupal\webprofiler\Form\FormBuilderWrapper definition.
-   *
-   * @var \Drupal\webprofiler\Form\FormBuilderWrapper
-   */
-  protected FormBuilderWrapper $formBuilder;
-
-  /**
-   * Drupal\my_users\Services\RegisterUsersService definition.
-   *
-   * @var \Drupal\my_users\Services\RegisterUsersService
-   */
-  protected RegisterUsersService $myUsersRegister;
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
-    return new static(
-      $container->get('form_builder'),
-      $$container->get('my_users.register'),
-    );
-    
-  }
+class RegisterUsersBlock extends BlockBase {
 
   /**
    * {@inheritdoc}
@@ -49,8 +20,8 @@ class RegisterUsersBlock extends BlockBase implements ContainerFactoryPluginInte
   public function build() {
     $build = [];
 
-    $registerUsersForm = $this->formBuilder->getForm('Drupal\my_users\Form\RegisterUsersForm');
-    $registerUsersModalForm = $this->formBuilder->getForm('Drupal\my_users\Form\RegisterUsersModalForm');
+    $registerUsersForm = \Drupal::formBuilder()->getForm('Drupal\my_users\Form\RegisterUsersForm');
+    $registerUsersModalForm = \Drupal::formBuilder()->getForm('Drupal\my_users\Form\RegisterUsersModalForm');
 
     $build = [
       '#theme' => 'register_users_block',
