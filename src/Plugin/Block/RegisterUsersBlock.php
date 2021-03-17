@@ -36,10 +36,11 @@ class RegisterUsersBlock extends BlockBase implements ContainerFactoryPluginInte
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
-    $instance = new static($configuration, $plugin_id, $plugin_definition);
-    $instance->formBuilder = $container->get('form_builder');
-    $instance->myUsersRegister = $container->get('my_users.register');
-    return $instance;
+    return new static(
+      $container->get('form_builder'),
+      $$container->get('my_users.register'),
+    );
+    
   }
 
   /**

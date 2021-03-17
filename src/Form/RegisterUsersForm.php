@@ -42,11 +42,11 @@ class RegisterUsersForm extends FormBase {
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    $instance = parent::create($container);
-    $instance->database = $container->get('database');
-    $instance->myUsersRegister = $container->get('my_users.register');
-    $instance->formBuilder = $container->get('form_builder');
-    return $instance;
+    return new static(
+      $container->get('database'),
+      $container->get('my_users.register'),
+      $container->get('form_builder'),
+    );
   }
 
   /**

@@ -58,8 +58,6 @@ class DataLoaderImportBatch {
   /**
    * Remember the uploaded CSV filename.
    *
-   * @todo Is there a better way to pass a value from inception of the batch to
-   * the finished function?
    */
   public static function csvImportRememberFilename($filename, &$context) {
 

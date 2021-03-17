@@ -154,7 +154,7 @@ class UsersController extends ControllerBase {
    */
   public function importUsersCsv(): array {
 
-    return \Drupal::formBuilder()->getForm('Drupal\my_users\Form\ImportUsersFromCsvForm');
+    return $this->formBuilder()->getForm('Drupal\my_users\Form\ImportUsersFromCsvForm');
 
 
   }

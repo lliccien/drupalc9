@@ -24,9 +24,9 @@ class ImportUsersFromCsvForm extends FormBase {
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
-    $instance = parent::create($container);
-    $instance->myUsersImportCsv = $container->get('my_users.import_csv');
-    return $instance;
+    return new static(
+      $container->get('my_users.import_csv'),
+    );
   }
 
   /**
