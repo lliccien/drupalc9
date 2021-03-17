@@ -36,13 +36,6 @@
       }
     });
 
-    // $.fn.resetForm = function (sleep) {
-    //   console.log('timeOut');
-    //   setTimeout(function () {
-    //     document.querySelector('#register-users-form').reset();
-    //   },sleep);
-    // };
-
   });
 
 })(jQuery);

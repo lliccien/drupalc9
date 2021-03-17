@@ -2,9 +2,7 @@
 
 namespace Drupal\my_users\Form;
 
-use Drupal\Core\Form\FormBuilder;
 use Drupal\my_users\Services\RegisterUsersService;
-use Drupal\Core\Database\Driver\mysql\Connection;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\HtmlCommand;
 use Drupal\Core\Form\FormBase;
@@ -18,13 +16,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class RegisterUsersForm extends FormBase {
 
   /**
-   * Drupal\Core\Database\Driver\mysql\Connection definition.
-   *
-   * @var \Drupal\Core\Database\Driver\mysql\Connection
-   */
-  protected Connection $database;
-
-  /**
    * Drupal\my_users\Services\RegisterUsersService definition.
    *
    * @var \Drupal\my_users\Services\RegisterUsersService
@@ -32,20 +23,21 @@ class RegisterUsersForm extends FormBase {
   protected RegisterUsersService $myUsersRegister;
 
   /**
-   * The form builder.
+   * Class constructor.
    *
-   * @var \Drupal\Core\Form\FormBuilder
+   * @param \Drupal\my_users\Services\RegisterUsersService $myUsersRegister
    */
-  protected FormBuilder $formBuilder;
+  public function __construct(RegisterUsersService $myUsersRegister) {
+    $this->myUsersRegister = $myUsersRegister;
+  }
+
 
   /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('database'),
       $container->get('my_users.register'),
-      $container->get('form_builder'),
     );
   }
 

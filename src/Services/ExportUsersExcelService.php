@@ -8,13 +8,6 @@ namespace Drupal\my_users\Services;
 class ExportUsersExcelService {
 
   /**
-   * Constructs a new ExportUsersExcelService object.
-   */
-  public function __construct() {
-
-  }
-
-  /**
    * Method csv Export.
    */
   public function csvExport() {

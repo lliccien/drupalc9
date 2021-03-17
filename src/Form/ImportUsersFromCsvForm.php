@@ -14,22 +14,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class ImportUsersFromCsvForm extends FormBase {
 
   /**
-   * Drupal\my_users\Services\ImportUsersCsvService definition.
-   *
-   * @var \Drupal\my_users\Services\ImportUsersCsvService
-   */
-  protected ImportUsersCsvService $myUsersImportCsv;
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function create(ContainerInterface $container) {
-    return new static(
-      $container->get('my_users.import_csv'),
-    );
-  }
-
-  /**
    * {@inheritdoc}
    */
   public function getFormId() {
