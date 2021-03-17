@@ -5,8 +5,9 @@
  * Contains my_users.module.
  */
 
-use Drupal\Core\Routing\RouteMatchInterface;
-
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\user\Entity\User;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Implements hook_theme_suggestions_HOOK() for contact form suggestion.
@@ -21,25 +22,6 @@ function my_users_theme_suggestions_form_alter(array &$suggestions, array $varia
   return $suggestions;
 }
 
-
-/**
- * Implements hook_help().
- */
-function my_users_help($route_name, RouteMatchInterface $route_match) {
-  switch ($route_name) {
-    // Main module help for the my_users module.
-    case 'help.page.my_users':
-      $output = '';
-      $output .= '<h3>' . t('About') . '</h3>';
-      $output .= '<p>' . t('Module Test for Serempre') . '</p>';
-      return $output;
-
-    default:
-  }
-}
-
-
-
 /**
  * Implements hook_theme().
  */
@@ -53,4 +35,59 @@ function my_users_theme() {
       'render element' => 'children',
     ],
   ];
+}
+
+
+function my_users_form_user_login_form_alter(&$form, FormStateInterface $form_state) {
+  $form['#submit'][] = '_my_users_set_log';
+
+}
+
+function _my_users_set_log(&$form, FormStateInterface $form_state) {
+
+  $request = Request::createFromGlobals();
+  $uid = \Drupal::currentUser()->id();
+  $ip = $request->getClientIp();
+  $type = 'LOGIN';
+  $date =  \Drupal::time()->getCurrentTime();
+
+  \Drupal::logger('my_users')->info("Campos Login: @uid, @ip, @type, @date", ['@uid' => $uid, '@ip' => $ip, '@type' =>$type, '@date' => $date]);
+
+  \Drupal::database()
+    ->insert('logs_login_register')
+    ->fields([
+      'uid' => $uid,
+      'ip' => $ip,
+      'type' => $type,
+      'date_timestamp' => $date
+    ])
+    ->execute();
+}
+
+/**
+ * Implements hook_user_insert().
+ *
+ */
+function my_users_user_insert(Drupal\Core\Entity\EntityInterface $entity) {
+
+  $messenger = \Drupal::messenger();
+  $messenger->addMessage(t('Registro intervenido'), 'status');
+
+  $request = Request::createFromGlobals();
+  $uid = \Drupal::currentUser()->id();
+  $ip = $request->getClientIp();
+  $type = 'REGISTER';
+  $date =  \Drupal::time()->getCurrentTime();
+
+  \Drupal::logger('my_users')->notice("Campos Register: @uid, @ip, @type, @date", ['@uid' => $uid, '@ip' => $ip, '@type' =>$type, '@date' => $date]);
+
+  \Drupal::database()
+    ->insert('logs_login_register')
+    ->fields([
+      'uid' => $uid,
+      'ip' => $ip,
+      'type' => $type,
+      'date_timestamp' => $date
+    ])
+    ->execute();
 }
